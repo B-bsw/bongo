@@ -29,3 +29,19 @@
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 } */
+
+.fadeTop{
+  animation: FOT 2s ease 0s 1 normal forwards;
+}
+
+@keyframes FOT {
+	0% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	100% {
+		opacity: 0;
+		transform: translateY(-70px);
+	}
+}

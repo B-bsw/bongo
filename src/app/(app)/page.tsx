@@ -10,10 +10,44 @@ export default function page() {
     const [isSwithImg, setIsSwitchImg] = useState<boolean>(true)
     const [count, setCount] = useState<number>(0)
 
+    const [popCount, setPopCount] = useState<Array<number>>([])
+
     const audioRef = useRef<HTMLAudioElement | null>(null)
 
+    const handlePop = () => {
+        setIsSwitchImg((e) => !e)
+        const current = Number.isFinite(count) ? count : 0
+        const next = current + 1
+        setCount(next)
+
+        const base = audioRef.current
+        if (base) {
+            try {
+                const clone = base.cloneNode(true) as HTMLAudioElement
+                clone.addEventListener('ended', () => {
+                    try {
+                        clone.src = ''
+                    } catch {}
+                })
+                clone.play().catch((err) => {
+                    console.warn('Audio play failed:', err)
+                })
+            } catch (err) {
+                try {
+                    base.currentTime = 0
+                    base.play().catch(() => {})
+                } catch {}
+            }
+        }
+
+        setPopCount((pre) => [...pre, next])
+        setTimeout(() => {
+            setPopCount((e) => e.filter((p) => p !== next))
+        }, 1500)
+    }
+
     useEffect(() => {
-        audioRef.current = new Audio('/sound/mouse.mp3')
+    audioRef.current = new Audio('/sound/pop.mp3')
         audioRef.current.preload = 'auto'
 
         return () => {
@@ -25,15 +59,17 @@ export default function page() {
     }, [])
 
     useEffect(() => {
-        setCount(Number(localStorage.getItem('score')))
-    }, []);
+        const raw = localStorage.getItem('score')
+        const n = Number(raw)
+        setCount(Number.isFinite(n) ? n : 0)
+    }, [])
 
     useEffect(() => {
-        localStorage.setItem('score',count.toString())
-    }, [count,isSwithImg]);
+        localStorage.setItem('score', Number.isFinite(count) ? count.toString() : '0')
+    }, [count, isSwithImg])
 
     return (
-        <div className="h-screen w-screen overflow-x-hidden p-2 overscroll-y-none overflow-y-hidden">
+        <div className="h-screen w-screen overflow-x-hidden overflow-y-hidden overscroll-y-none p-2">
             <main className="h-full">
                 <nav className="flex items-center justify-between p-4">
                     <div>
@@ -45,34 +81,17 @@ export default function page() {
                 </nav>
 
                 <div className="flex h-full flex-col items-center justify-evenly">
-                    <div className="font-prompt text-5xl font-medium">{count}</div>
+                    <div className="font-prompt text-5xl font-medium">
+                        {count}
+                    </div>
 
-                    <div
-                        onClick={() => {
-                            setIsSwitchImg((e) => !e)
-                            setCount((c) => c + 1)
-
-                            const base = audioRef.current
-                            if (base) {
-                                try {
-                                    const clone = base.cloneNode(true) as HTMLAudioElement
-                                    clone.addEventListener('ended', () => {
-                                        try {
-                                            clone.src = ''
-                                        } catch {}
-                                    })
-                                    clone.play().catch((err) => {
-                                        console.warn('Audio play failed:', err)
-                                    })
-                                } catch (err) {
-                                    try {
-                                        base.currentTime = 0
-                                        base.play().catch(() => {})
-                                    } catch {}
-                                }
-                            }
-                        }}
-                    >
+                    <div onClick={handlePop}>
+                        <div className="absolute transition-all ">
+                            {popCount?.length > 0 &&
+                                popCount.map((item) => (
+                                    <div key={item} className='fixed fadeTop'>POP</div>
+                                ))}
+                        </div>
                         <Image src={isSwithImg ? bongo1 : bongo2} alt="bongo" />
                     </div>
                 </div>
