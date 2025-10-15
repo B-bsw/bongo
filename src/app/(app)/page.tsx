@@ -25,7 +25,7 @@ export default function page() {
     }, [])
 
     return (
-        <div className="h-screen w-screen overflow-x-hidden p-2">
+        <div className="h-screen w-screen overflow-x-hidden p-2 overscroll-y-none overflow-y-hidden">
             <main className="h-full">
                 <nav className="flex items-center justify-between p-4">
                     <div>
@@ -40,7 +40,6 @@ export default function page() {
                     <div className="font-prompt text-5xl font-medium">{count}</div>
 
                     <div
-                        className="w-full"
                         onClick={() => {
                             setIsSwitchImg((e) => !e)
                             setCount((c) => c + 1)
