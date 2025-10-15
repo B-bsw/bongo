@@ -24,6 +24,14 @@ export default function page() {
         }
     }, [])
 
+    useEffect(() => {
+        setCount(Number(localStorage.getItem('score')))
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem('score',count.toString())
+    }, [count,isSwithImg]);
+
     return (
         <div className="h-screen w-screen overflow-x-hidden p-2 overscroll-y-none overflow-y-hidden">
             <main className="h-full">
