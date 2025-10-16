@@ -21,7 +21,7 @@ const DialogMainApp = () => {
                 </DialogTrigger>
                 <DialogContent>
                     <DialogHeader>
-                        <DialogTitle>What are you want?</DialogTitle>
+                        <DialogTitle>Information</DialogTitle>
                         <DialogDescription>Create by BBSW</DialogDescription>
                         <DialogFooter>
                             <div className="flex items-center justify-center gap-2">
