@@ -2,9 +2,10 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 
-import bongo1 from '@/public/image/bongocat-0000.jpg'
-import bongo2 from '@/public/image/bongocat-0003.jpg'
+import bongo1 from '@/../public/image/bongocat-0000.jpg'
+import bongo2 from '@/../public/image/bongocat-0003.jpg'
 import { LucideOctagonX, User } from 'lucide-react'
+import DialogMainApp from '@/components/dialog/DialogMainApp'
 
 export default function page() {
     const [isSwithImg, setIsSwitchImg] = useState<boolean>(true)
@@ -73,7 +74,8 @@ export default function page() {
             <main className="h-full">
                 <nav className="flex items-center justify-between p-4">
                     <div>
-                        <LucideOctagonX />
+                        {/* <LucideOctagonX /> */}
+                        <DialogMainApp/>
                     </div>
                     <div>
                         <User />
