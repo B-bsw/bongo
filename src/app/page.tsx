@@ -1,9 +1,12 @@
+import LayoutMain from '@/components/layout/LayoutMain'
 import App from './(app)/page'
 
 export default function Home() {
     return (
         <>
-            <App />
+            <LayoutMain>
+                <App />
+            </LayoutMain>
         </>
     )
 }

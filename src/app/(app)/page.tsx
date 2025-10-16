@@ -1,16 +1,21 @@
 'use client'
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useContext } from 'react'
 import Image from 'next/image'
 
 import bongo1 from '@/../public/image/bongocat-0000.jpg'
 import bongo2 from '@/../public/image/bongocat-0003.jpg'
-import { LucideOctagonX, User } from 'lucide-react'
-import DialogMainApp from '@/components/dialog/DialogMainApp'
+import { LayoutMainContext } from '@/components/layout/LayoutMain'
 
 export default function page() {
-    const [isSwithImg, setIsSwitchImg] = useState<boolean>(true)
-    const [count, setCount] = useState<number>(0)
+    const context = useContext(LayoutMainContext)
 
+    if (!context) {
+        throw new Error('missing context')
+    }
+
+    const { count, setCount } = context
+
+    const [isSwithImg, setIsSwitchImg] = useState<boolean>(true)
     const [popCount, setPopCount] = useState<Array<number>>([])
 
     const audioRef = useRef<HTMLAudioElement | null>(null)
@@ -48,7 +53,7 @@ export default function page() {
     }
 
     useEffect(() => {
-    audioRef.current = new Audio('/sound/pop.mp3')
+        audioRef.current = new Audio('/sound/pop.mp3')
         audioRef.current.preload = 'auto'
 
         return () => {
@@ -66,38 +71,34 @@ export default function page() {
     }, [])
 
     useEffect(() => {
-        localStorage.setItem('score', Number.isFinite(count) ? count.toString() : '0')
+        localStorage.setItem(
+            'score',
+            Number.isFinite(count) ? count.toString() : '0'
+        )
     }, [count, isSwithImg])
 
     return (
-        <div className="h-screen w-screen overflow-hidden overscroll-none overscroll-y-none p-2 select-none">
-            <main className="h-full">
-                <nav className="flex items-center justify-between p-4">
-                    <div>
-                        {/* <LucideOctagonX /> */}
-                        <DialogMainApp/>
-                    </div>
-                    <div>
-                        <User />
-                    </div>
-                </nav>
+        <div className="h-100">
+            <div className="flex h-full flex-col items-center justify-between">
+                <div className="font-prompt text-5xl font-medium">{count}</div>
 
-                <div className="flex h-full flex-col items-center justify-evenly">
-                    <div className="font-prompt text-5xl font-medium">
-                        {count}
+                <div
+                    onClick={handlePop}
+                    className="touch-manipulation select-none"
+                >
+                    <div className="pointer-events-none absolute inset-0">
+                        {popCount.map((item) => (
+                            <div
+                                key={item}
+                                className="fadeTop absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform text-3xl font-bold text-pink-400"
+                            >
+                                POP!
+                            </div>
+                        ))}
                     </div>
-
-                    <div onClick={handlePop} className='touch-manipulation select-none'>
-                        <div className="absolute transition-all ">
-                            {popCount?.length > 0 &&
-                                popCount.map((item) => (
-                                    <div key={item} className='fixed fadeTop'>POP</div>
-                                ))}
-                        </div>
-                        <Image src={isSwithImg ? bongo1 : bongo2} alt="bongo" />
-                    </div>
+                    <Image src={isSwithImg ? bongo1 : bongo2} alt="bongo" />
                 </div>
-            </main>
+            </div>
         </div>
     )
 }

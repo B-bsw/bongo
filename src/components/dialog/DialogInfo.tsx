@@ -12,7 +12,7 @@ import {
 import { GithubIcon, LucideOctagonX } from 'lucide-react'
 import Link from 'next/link'
 
-const DialogMainApp = () => {
+const DialogInfo = () => {
     return (
         <div>
             <Dialog>
@@ -44,4 +44,4 @@ const DialogMainApp = () => {
     )
 }
 
-export default DialogMainApp
+export default DialogInfo
