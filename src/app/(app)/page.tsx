@@ -69,7 +69,7 @@ export default function page() {
     }, [count, isSwithImg])
 
     return (
-        <div className="h-screen w-screen overflow-hidden overscroll-none overscroll-y-none p-2">
+        <div className="h-screen w-screen overflow-hidden overscroll-none overscroll-y-none p-2 select-none">
             <main className="h-full">
                 <nav className="flex items-center justify-between p-4">
                     <div>
@@ -85,7 +85,7 @@ export default function page() {
                         {count}
                     </div>
 
-                    <div onClick={handlePop}>
+                    <div onClick={handlePop} className='touch-manipulation select-none'>
                         <div className="absolute transition-all ">
                             {popCount?.length > 0 &&
                                 popCount.map((item) => (
