@@ -21,7 +21,7 @@ const LayoutMain = ({ children }: { children: React.ReactNode }) => {
                     <DialogInfo />
                     <DialogProfile />
                 </nav>
-                <main className="flex flex-1 items-center">{children}</main>
+                <main className="flex flex-1 items-center justify-center">{children}</main>
             </div>
         </LayoutMainContext.Provider>
     )
