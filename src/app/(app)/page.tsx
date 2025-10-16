@@ -69,7 +69,7 @@ export default function page() {
     }, [count, isSwithImg])
 
     return (
-        <div className="h-screen w-screen overflow-x-hidden overflow-y-hidden overscroll-y-none p-2">
+        <div className="h-screen w-screen overflow-hidden overscroll-none overscroll-y-none p-2">
             <main className="h-full">
                 <nav className="flex items-center justify-between p-4">
                     <div>
