@@ -6,7 +6,7 @@ import bongo1 from '@/../public/image/bongocat-0000.jpg'
 import bongo2 from '@/../public/image/bongocat-0003.jpg'
 import { LayoutMainContext } from '@/components/layout/LayoutMain'
 
-export default function page() {
+export default function Page() {
     const context = useContext(LayoutMainContext)
 
     if (!context) {
@@ -14,14 +14,13 @@ export default function page() {
     }
 
     const { count, setCount } = context
-
-    const [isSwithImg, setIsSwitchImg] = useState<boolean>(true)
-    const [popCount, setPopCount] = useState<Array<number>>([])
-
+    const [isSwitchImg, setIsSwitchImg] = useState(true)
+    const [popCount, setPopCount] = useState<number[]>([])
     const audioRef = useRef<HTMLAudioElement | null>(null)
 
     const handlePop = () => {
-        setIsSwitchImg((e) => !e)
+        setIsSwitchImg(false)
+
         const current = Number.isFinite(count) ? count : 0
         const next = current + 1
         setCount(next)
@@ -30,37 +29,27 @@ export default function page() {
         if (base) {
             try {
                 const clone = base.cloneNode(true) as HTMLAudioElement
-                clone.addEventListener('ended', () => {
-                    try {
-                        clone.src = ''
-                    } catch {}
-                })
-                clone.play().catch((err) => {
-                    console.warn('Audio play failed:', err)
-                })
-            } catch (err) {
-                try {
-                    base.currentTime = 0
-                    base.play().catch(() => {})
-                } catch {}
+                clone.play().catch(() => {})
+            } catch {
+                base.currentTime = 0
+                base.play().catch(() => {})
             }
         }
 
-        setPopCount((pre) => [...pre, next])
+        setPopCount((prev) => [...prev, next])
         setTimeout(() => {
             setPopCount((e) => e.filter((p) => p !== next))
-        }, 1500)
+        }, 700)
+
+        setTimeout(() => setIsSwitchImg(true), 120)
     }
 
     useEffect(() => {
         audioRef.current = new Audio('/sound/pop.mp3')
         audioRef.current.preload = 'auto'
-
         return () => {
-            if (audioRef.current) {
-                audioRef.current.pause()
-                audioRef.current = null
-            }
+            audioRef.current?.pause()
+            audioRef.current = null
         }
     }, [])
 
@@ -75,29 +64,34 @@ export default function page() {
             'score',
             Number.isFinite(count) ? count.toString() : '0'
         )
-    }, [count, isSwithImg])
+    }, [count])
 
     return (
-        <div className="h-100">
-            <div className="flex h-full flex-col items-center justify-between">
-                <div className="font-prompt text-5xl font-medium">{count}</div>
+        <div className="flex h-screen flex-col items-center justify-center overflow-hidden select-none">
+            <div className="font-prompt mb-4 text-6xl font-bold">{count}</div>
 
-                <div
-                    onClick={handlePop}
-                    className="touch-manipulation select-none"
-                >
-                    <div className="pointer-events-none absolute inset-0">
-                        {popCount.map((item) => (
-                            <div
-                                key={item}
-                                className="fadeTop absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform text-3xl font-bold text-pink-400"
-                            >
-                                POP!
-                            </div>
-                        ))}
+            <div
+                onClick={handlePop}
+                className="relative cursor-pointer touch-manipulation"
+            >
+                {popCount.map((item) => (
+                    <div
+                        key={item}
+                        className="fadeTop absolute top-1/5 left-1/2 -translate-x-1/2 -translate-y-1/2 text-4xl font-extrabold text-pink-400"
+                    >
+                        POP!
                     </div>
-                    <Image src={isSwithImg ? bongo1 : bongo2} alt="bongo" />
-                </div>
+                ))}
+
+                <Image
+                    src={isSwitchImg ? bongo1 : bongo2}
+                    alt="bongo"
+                    width={400}
+                    height={400}
+                    priority
+                    draggable={false}
+                    className="select-none"
+                />
             </div>
         </div>
     )
