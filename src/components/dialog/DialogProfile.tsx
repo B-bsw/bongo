@@ -21,7 +21,7 @@ const DialogProfile = () => {
     const { setCount } = context
 
     const handleResetScore = () => {
-        localStorage.setItem('score','0')
+        localStorage.setItem('score', '0')
         setCount(0)
     }
     return (
@@ -33,29 +33,30 @@ const DialogProfile = () => {
                 <DialogContent>
                     <DialogHeader>
                         <DialogTitle>Profile</DialogTitle>
+
+                        <div className="">
+                            <div className='w-full flex items-center justify-between'>
+                                <label
+                                    htmlFor="name"
+                                    className="font-prompt text-md text-gray-900 font-semibold"
+                                >
+                                    Name:
+                                </label>
+                                <input
+                                    id="name"
+                                    name="name"
+                                    type="text"
+                                    autoComplete="name"
+                                    required
+                                    className="rounded-md border-2 p-1"
+                                />
+                            </div>
+                        </div>
                         <div>
-                            <button
-                                onClick={handleResetScore}
-                                className="bg-accent border-accent text-accent-foreground hover:bg-accent-foreground hover:text-accent rounded-md border px-2 py-1 transition-all active:scale-90"
-                            >
-                                Reset
+                            <button className="font-prompt rounded-md bg-secondary px-2 py-1 font-medium transition-all active:scale-90">
+                                Confirm
                             </button>
                         </div>
-                        {/* <DialogDescription>Create by BBSW</DialogDescription> */}
-                        <DialogFooter>
-                            {/* <div className="flex items-center justify-center gap-2">
-                                <div className="rounded-full border p-1">
-                                    <GithubIcon />
-                                </div>
-                                <Link
-                                    href={'https://github.com/b-bsw'}
-                                    target="_blank"
-                                    className="hover:bg-foreground font-prompt hover:text-background rounded-2xl border px-2 py-1 transition-all active:scale-90"
-                                >
-                                    GITHUB
-                                </Link>
-                            </div> */}
-                        </DialogFooter>
                     </DialogHeader>
                 </DialogContent>
             </Dialog>
