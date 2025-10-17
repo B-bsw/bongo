@@ -183,10 +183,7 @@
 }
 
 body {
-    padding-top: env(safe-area-inset-top);
-    padding-right: env(safe-area-inset-right);
-    padding-bottom: env(safe-area-inset-bottom);
-    padding-left: env(safe-area-inset-left);
+    height: 100vh;
 }
 
 html {
@@ -194,5 +191,13 @@ html {
 }
 
 .safe-area-inset-bottom {
-    margin-bottom: env(safe-area-inset-bottom);
+    padding-bottom: constant(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+.footer-with-inset {
+    /* base height 2.5rem (h-10 in Tailwind) + safe area inset */
+    height: calc(2.5rem + env(safe-area-inset-bottom, 0px));
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    box-sizing: border-box;
 }

@@ -75,6 +75,9 @@ export default function page() {
             'score',
             Number.isFinite(count) ? count.toString() : '0'
         )
+        setTimeout(() => {
+            setIsSwitchImg(false)
+        }, 100)
     }, [count, isSwithImg])
 
     return (
