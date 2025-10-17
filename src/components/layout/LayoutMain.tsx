@@ -27,7 +27,7 @@ const LayoutMain = ({ children }: { children: React.ReactNode }) => {
                     <main className="flex items-center justify-center">
                         {children}
                     </main>
-                    <footer className="flex h-10 w-full items-stretch rounded-lg bg-zinc-400" style={{ marginBottom: 'env(safe-area-inset-bottom)' }}>
+                    <footer className="flex h-10 w-full items-stretch rounded-lg bg-zinc-400 safe-area-inset-bottom">
                         <div className="[&_button]:font-prompt [&_button]:hover:bg-accent flex w-full items-center justify-around gap-1 px-1 [&_button]:grow [&_button]:cursor-pointer [&_button]:rounded-md [&_button]:bg-zinc-300 [&_button]:px-2 [&_button]:py-1 [&_button]:font-bold [&_button]:text-zinc-800 [&_button]:transition-all [&_button]:active:scale-95">
                             <button onClick={() => route.push('/')}>
                                 Home
