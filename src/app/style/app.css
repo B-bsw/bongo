@@ -183,7 +183,7 @@
 }
 
 body {
-    height: 100vh;
+    height: calc(100vh - env(safe-area-inset-bottom));
 }
 
 html {
@@ -196,7 +196,6 @@ html {
 }
 
 .footer-with-inset {
-    /* base height 2.5rem (h-10 in Tailwind) + safe area inset */
     height: calc(2.5rem + env(safe-area-inset-bottom, 0px));
     padding-bottom: env(safe-area-inset-bottom, 0px);
     box-sizing: border-box;
