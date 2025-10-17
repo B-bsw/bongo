@@ -18,27 +18,30 @@ const LayoutMain = ({ children }: { children: React.ReactNode }) => {
     const [count, setCount] = useState<number>(0)
     return (
         <LayoutMainContext.Provider value={{ count, setCount }}>
-            <div className="flex min-h-screen flex-col p-2 select-none">
-                <div className="flex h-full flex-1 flex-col justify-between">
+            <div className="h-full p-2 select-none">
+                <div className="flex h-full flex-col justify-between">
                     <nav className="mb-4 flex items-center justify-between">
                         <DialogInfo />
                         <DialogProfile />
                     </nav>
-                    <main className="flex items-center justify-center">
+                    <main className="flex h-full items-center justify-center">
                         {children}
                     </main>
-                    <footer className="flex h-10 w-full items-stretch rounded-lg bg-zinc-400">
-                        <div className="[&_button]:font-prompt [&_button]:hover:bg-accent flex w-full items-center justify-around gap-1 px-1 [&_button]:grow [&_button]:cursor-pointer [&_button]:rounded-md [&_button]:bg-zinc-300 [&_button]:px-2 [&_button]:py-1 [&_button]:font-bold [&_button]:text-zinc-800 [&_button]:transition-all [&_button]:active:scale-95">
-                            <button onClick={() => route.push('/')}>
-                                Home
-                            </button>
-                            <button onClick={() => route.push('/rank')}>
-                                rank
-                            </button>
-                            <button onClick={() => route.push('/other')}>
-                                other
-                            </button>
-                        </div>
+
+                    <footer className="absolute bottom-2 left-0 h-10 w-full rounded-lg bg-zinc-400">
+                        <main className="flex w-full items-stretch py-1">
+                            <div className="[&_button]:font-prompt [&_button]:hover:bg-accent flex w-full items-center justify-around gap-1 px-1 [&_button]:grow [&_button]:cursor-pointer [&_button]:rounded-md [&_button]:bg-zinc-300 [&_button]:px-2 [&_button]:py-1 [&_button]:font-bold [&_button]:text-zinc-800 [&_button]:transition-all [&_button]:active:scale-95">
+                                <button onClick={() => route.push('/')}>
+                                    Home
+                                </button>
+                                <button onClick={() => route.push('/rank')}>
+                                    rank
+                                </button>
+                                <button onClick={() => route.push('/other')}>
+                                    other
+                                </button>
+                            </div>
+                        </main>
                     </footer>
                 </div>
             </div>

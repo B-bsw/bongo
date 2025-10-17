@@ -1,16 +1,16 @@
 import type { Metadata, Viewport } from 'next'
 import './style/app.css'
 
-
 export const metadata: Metadata = {
     title: 'Bongo Bongo',
     description: 'this is app',
 }
+
 export const viewport: Viewport = {
+    viewportFit: 'cover',
     width: 'device-width',
     initialScale: 1,
-    maximumScale: 1,
-    userScalable: true,
+    userScalable: false,
 }
 
 export default function RootLayout({
