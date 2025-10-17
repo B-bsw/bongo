@@ -1,11 +1,7 @@
 import React from 'react'
 
 const page = () => {
-  return (
-    <div>
-      app
-    </div>
-  )
+    return <div>Other</div>
 }
 
 export default page
