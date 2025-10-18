@@ -36,7 +36,7 @@ const DialogProfile = () => {
 
                         <div className="">
                             <div className='w-full flex items-center justify-between'>
-                                <label
+                                {/*<label
                                     htmlFor="name"
                                     className="font-prompt text-md text-gray-900 font-semibold"
                                 >
@@ -49,7 +49,8 @@ const DialogProfile = () => {
                                     autoComplete="name"
                                     required
                                     className="rounded-md border-2 p-1"
-                                />
+                                />*/}
+                                Login / Register is Comming soon...
                             </div>
                         </div>
                         <div>

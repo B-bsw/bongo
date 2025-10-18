@@ -28,8 +28,8 @@ const LayoutMain = ({ children }: { children: React.ReactNode }) => {
                         {children}
                     </main>
 
-                    <footer className="absolute bottom-2 left-0 h-10 w-full px-4">
-                        <main className="flex w-full items-stretch py-1 rounded-lg bg-zinc-400">
+                    <footer className="absolute bottom-2 left-0 h-10 w-full px-1 md:px-50">
+                        <main className="flex w-full items-stretch rounded-lg bg-zinc-400 py-1">
                             <div className="[&_button]:font-prompt [&_button]:hover:bg-accent flex w-full items-center justify-around gap-1 px-1 [&_button]:grow [&_button]:cursor-pointer [&_button]:rounded-md [&_button]:bg-zinc-300 [&_button]:px-2 [&_button]:py-1 [&_button]:font-bold [&_button]:text-zinc-800 [&_button]:transition-all [&_button]:active:scale-95">
                                 <button onClick={() => route.push('/')}>
                                     Home
