@@ -18,7 +18,7 @@ const LayoutMain = ({ children }: { children: React.ReactNode }) => {
     const [count, setCount] = useState<number>(0)
     return (
         <LayoutMainContext.Provider value={{ count, setCount }}>
-            <div className="h-full p-2 select-none">
+            <div className="h-full p-2 select-none overflow-hidden">
                 <div className="flex h-full flex-col justify-between">
                     <nav className="mb-4 flex items-center justify-between">
                         <DialogInfo />
