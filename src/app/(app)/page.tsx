@@ -84,7 +84,7 @@ export default function page() {
             onTouchEnd={() =>
                 setTimeout(() => {
                     setIsSwitchImg(false)
-                }, 100)
+                }, 50)
             }
             onMouseDown={handlePop}
             onMouseUp={() =>
