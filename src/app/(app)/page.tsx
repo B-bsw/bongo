@@ -81,7 +81,7 @@ export default function page() {
     }, [count, isSwithImg])
 
     return (
-        <div className="h-100" onClick={handlePop}>
+        <div className="h-100" onMouseDown={handlePop}>
             <div className="flex h-full flex-col items-center justify-between">
                 <div className="font-prompt text-5xl font-medium">{count}</div>
 
