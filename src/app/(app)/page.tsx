@@ -81,17 +81,9 @@ export default function page() {
         <div
             className="h-100"
             onTouchStart={handlePop}
-            onTouchEnd={() =>
-                setTimeout(() => {
-                    setIsSwitchImg(false)
-                }, 20)
-            }
+            onTouchEnd={() => setIsSwitchImg(false)}
             onMouseDown={handlePop}
-            onMouseUp={() =>
-                setTimeout(() => {
-                    setIsSwitchImg(false)
-                }, 10)
-            }
+            onMouseUp={() => setIsSwitchImg(false)}
         >
             <div className="flex h-full flex-col items-center justify-between">
                 <div className="font-prompt text-5xl font-medium">{count}</div>
