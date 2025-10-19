@@ -1,6 +1,7 @@
 'use client'
 import React, { useState, useEffect, useRef, useContext } from 'react'
 import { LayoutMainContext } from '@/components/layout/LayoutMain'
+import useSound from 'use-sound'
 
 export default function page() {
     const context = useContext(LayoutMainContext)
@@ -9,16 +10,8 @@ export default function page() {
     const { count, setCount } = context
     const [isSwitchImg, setIsSwitchImg] = useState(true)
     const [popCount, setPopCount] = useState<number[]>([])
-    const audioRef = useRef<HTMLAudioElement | null>(null)
 
-    const audioPlay = () => {
-        const base = audioRef.current
-        if (base) {
-                const clone = base.cloneNode(true) as HTMLAudioElement
-                clone.play().catch(() => {})
-
-        }
-    }
+    const [play] = useSound('/sound/pop.mp3', { volume: 1 })
 
     const handlePop = () => {
         setIsSwitchImg((e) => !e)
@@ -26,24 +19,13 @@ export default function page() {
         const next = current + 1
         setCount(next)
 
-        audioPlay()
+        play()
 
         setPopCount((pre) => [...pre, next])
         setTimeout(() => {
             setPopCount((e) => e.filter((p) => p !== next))
         }, 1200)
     }
-
-    useEffect(() => {
-        audioRef.current = new Audio('/sound/pop.mp3')
-        audioRef.current.preload = 'auto'
-        return () => {
-            if (audioRef.current) {
-                audioRef.current.pause()
-                audioRef.current = null
-            }
-        }
-    }, [])
 
     useEffect(() => {
         const raw = localStorage.getItem('score')
@@ -61,19 +43,8 @@ export default function page() {
     return (
         <div
             className="h-100"
-            onTouchStart={handlePop}
-            onTouchEnd={() =>
-                setTimeout(() => {
-                    setIsSwitchImg(false)
-                }, 100)
-            }
-
-            // onMouseDown={handlePop}
-            // onMouseUp={() =>
-            //     setTimeout(() => {
-            //         setIsSwitchImg(false)
-            //     }, 40)
-            // }
+            onPointerDown={handlePop}
+            onPointerUp={() => setIsSwitchImg(false)}
         >
             <div className="flex h-full flex-col items-center justify-between">
                 <div className="font-prompt text-5xl font-medium">{count}</div>
