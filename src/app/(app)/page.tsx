@@ -81,7 +81,9 @@ export default function page() {
         <div
             className="h-100"
             onTouchStart={handlePop}
-            onTouchEnd={() => setIsSwitchImg(false)}
+            onTouchEnd={() => setTimeout(() => {
+                setIsSwitchImg(false)
+            },15)}
             onMouseDown={handlePop}
             onMouseUp={() => setIsSwitchImg(false)}
         >
