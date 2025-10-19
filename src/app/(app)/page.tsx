@@ -8,7 +8,7 @@ export default function page() {
     if (!context) throw new Error('missing context')
 
     const { count, setCount } = context
-    const [isSwitchImg, setIsSwitchImg] = useState(true)
+    const [isSwitchImg, setIsSwitchImg] = useState(false)
     const [popCount, setPopCount] = useState<number[]>([])
 
     const [play] = useSound('/sound/pop.mp3', { volume: 1 })
