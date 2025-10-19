@@ -1,3 +1,4 @@
+'use client'
 import LayoutMain from '@/components/layout/LayoutMain'
 import React from 'react'
 

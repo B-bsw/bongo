@@ -182,7 +182,17 @@
     }
 }
 
-html, body {
-  overflow: hidden;
-  height: 100vh;
+html,
+body {
+    overflow: hidden;
+    height: 100vh;
+}
+
+.bgCat0 {
+    background-image: url('./../../../public/image/bongocat-0000.jpg');
+    background-size:100%;
+}
+.bgCat1 {
+    background-image: url('./../../../public/image/bongocat-0003.jpg');
+    background-size:100%;
 }

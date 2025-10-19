@@ -75,13 +75,24 @@ export default function page() {
             'score',
             Number.isFinite(count) ? count.toString() : '0'
         )
-        setTimeout(() => {
-            setIsSwitchImg(false)
-        }, 100)
     }, [count, isSwithImg])
 
     return (
-        <div className="h-100" onMouseDown={handlePop}>
+        <div
+            className="h-100"
+            onTouchStart={handlePop}
+            onTouchEnd={() =>
+                setTimeout(() => {
+                    setIsSwitchImg(false)
+                }, 10)
+            }
+            onMouseDown={handlePop}
+            onMouseUp={() =>
+                setTimeout(() => {
+                    setIsSwitchImg(false)
+                }, 10)
+            }
+        >
             <div className="flex h-full flex-col items-center justify-between">
                 <div className="font-prompt text-5xl font-medium">{count}</div>
 
@@ -96,7 +107,9 @@ export default function page() {
                             </div>
                         ))}
                     </div>
-                    <Image src={isSwithImg ? bongo1 : bongo2} alt="bongo" />
+                    <div
+                        className={`${isSwithImg ? 'bgCat0' : 'bgCat1'} h-60 w-100 bg-red-400 select-none`}
+                    ></div>
                 </div>
             </div>
         </div>
